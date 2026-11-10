@@ -1,0 +1,16 @@
+com\jobportal\dto\JobResponseDto.class
+com\jobportal\config\WebConfig.class
+com\jobportal\repository\JobRepository.class
+com\jobportal\controller\JobController.class
+com\jobportal\service\JobService.class
+com\jobportal\dto\ApplicationRequestDto.class
+com\jobportal\model\Application.class
+com\jobportal\config\DataInitializer.class
+com\jobportal\dto\JobRequestDto.class
+com\jobportal\model\Job.class
+com\jobportal\dto\DashboardStatsDto.class
+com\jobportal\service\ApplicationService.class
+com\jobportal\repository\ApplicationRepository.class
+com\jobportal\controller\StatsController.class
+com\jobportal\JobPortalApplication.class
+com\jobportal\controller\ApplicationController.class
