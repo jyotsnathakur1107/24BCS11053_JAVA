@@ -1,0 +1,252 @@
+{
+  "info": {
+    "_postman_id": "a9b8c7d6-e5f4-4321-abcd-ef0123456789",
+    "name": "Student Management REST API",
+    "description": "Postman Collection for testing Student Management REST API endpoints built with Spring Boot, Spring Data JPA, and MySQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Add a New Student",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"course\": \"Computer Science\",\n  \"age\": 21\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students"
+          ]
+        },
+        "description": "Endpoint to create a new student record. Expected status: 201 Created."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Add Second Student (Data Science)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane.smith@example.com\",\n  \"course\": \"Data Science\",\n  \"age\": 22\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students"
+          ]
+        },
+        "description": "Adds a second student with course 'Data Science'. Expected status: 201 Created."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Retrieve All Students",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students"
+          ]
+        },
+        "description": "Retrieves the list of all students. Expected status: 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Retrieve Student by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "1"
+          ]
+        },
+        "description": "Retrieves a student by primary key ID. Expected status: 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Retrieve Student by ID - Not Found (404 Test)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "999"
+          ]
+        },
+        "description": "Tests exception handling for non-existing student. Expected status: 404 Not Found."
+      },
+      "response": []
+    },
+    {
+      "name": "6. Update Student Details",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Johnathan Doe\",\n  \"email\": \"johnathan.doe@example.com\",\n  \"course\": \"Computer Science\",\n  \"age\": 22\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "1"
+          ]
+        },
+        "description": "Updates details for student with ID 1. Expected status: 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "7. Retrieve Students by Course (Computer Science)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/course/Computer%20Science",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "course",
+            "Computer%20Science"
+          ]
+        },
+        "description": "Retrieves all students enrolled in 'Computer Science'. Expected status: 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "8. Retrieve Students by Course (Data Science)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/course/Data%20Science",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "course",
+            "Data%20Science"
+          ]
+        },
+        "description": "Retrieves all students enrolled in 'Data Science'. Expected status: 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "9. Validation Failure Test (400 Bad Request)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-a-valid-email\",\n  \"course\": \"\",\n  \"age\": -1\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/students",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students"
+          ]
+        },
+        "description": "Tests validation handling for blank fields, invalid email format, and negative age. Expected status: 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "10. Delete a Student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/students/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "students",
+            "1"
+          ]
+        },
+        "description": "Deletes the student record with ID 1. Expected status: 200 OK."
+      },
+      "response": []
+    }
+  ]
+}
+

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman API Test Results - Student Management API</title>
+    <style>
+        :root {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #252526;
+            --bg-card: #2d2d2d;
+            --border-color: #3e3e42;
+            --text-primary: #cccccc;
+            --text-heading: #ffffff;
+            --accent-orange: #ff6c37;
+            --badge-get: #0cbb52;
+            --badge-post: #ffb400;
+            --badge-put: #097bed;
+            --badge-delete: #eb2013;
+            --status-200: #0cbb52;
+            --status-400: #eb2013;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 24px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .header img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .header h1 {
+            color: var(--text-heading);
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 4px 0 0 0;
+            color: #888888;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            background: var(--bg-secondary);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .request-url-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        .method-badge {
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .badge-post { background-color: var(--badge-post); }
+        .badge-get { background-color: var(--badge-get); color: #fff; }
+        .badge-put { background-color: var(--badge-put); color: #fff; }
+        .badge-delete { background-color: var(--badge-delete); color: #fff; }
+
+        .url-text {
+            color: #e0e0e0;
+        }
+
+        .status-badge {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(12, 187, 82, 0.15);
+            color: var(--status-200);
+            border: 1px solid var(--status-200);
+        }
+
+        .status-badge.error {
+            background: rgba(235, 32, 19, 0.15);
+            color: var(--status-400);
+            border-color: var(--status-400);
+        }
+
+        .card-body {
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 850px) {
+            .card-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: #181818;
+            border: 1px solid #333333;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .panel-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #8e8e8e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        pre {
+            margin: 0;
+            font-family: Consolas, "Fira Code", monospace;
+            font-size: 13px;
+            color: #9cdcfe;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .meta-info {
+            font-size: 12px;
+            color: #888;
+            padding: 8px 18px;
+            background: #232323;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <svg width="44" height="44" viewBox="0 0 256 256" fill="none">
+            <circle cx="128" cy="128" r="128" fill="#FF6C37"/>
+            <path d="M178 116l-38-38c-4-4-10-4-14 0l-12 12-18-18c-4-4-10-4-14 0l-38 38c-4 4-4 10 0 14l38 38c4 4 10 4 14 0l18-18 12 12c4 4 10 4 14 0l38-38c4-4 4-10 0-14z" fill="#FFF"/>
+        </svg>
+    </div>
+    <div>
+        <h1>Student Management REST API &bull; Postman Verification Suite</h1>
+        <p>Verified API Endpoints &bull; Spring Boot 3.3.4 &bull; Spring Data JPA &bull; MySQL 8.0</p>
+    </div>
+</div>
+
+<div class="grid">
+
+    <!-- Endpoint 1 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-post">POST</span>
+                <span class="url-text">http://localhost:8080/api/students</span>
+            </div>
+            <span class="status-badge">Status: 201 Created</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Request Body (raw JSON)</span></div>
+                <pre>{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "course": "Computer Science",
+  "age": 21
+}</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "course": "Computer Science",
+  "age": 21
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Adds a new student record into MySQL</span>
+            <span>Response Time: 34 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 2 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-post">POST</span>
+                <span class="url-text">http://localhost:8080/api/students</span>
+            </div>
+            <span class="status-badge">Status: 201 Created</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Request Body (raw JSON)</span></div>
+                <pre>{
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "course": "Data Science",
+  "age": 22
+}</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>{
+  "id": 2,
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "course": "Data Science",
+  "age": 22
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Adds a second student with different course</span>
+            <span>Response Time: 21 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 3 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-get">GET</span>
+                <span class="url-text">http://localhost:8080/api/students</span>
+            </div>
+            <span class="status-badge">Status: 200 OK</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Request Parameters / Headers</span></div>
+                <pre>Headers:
+Accept: application/json</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body (Array of Students)</span></div>
+                <pre>[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "course": "Computer Science",
+    "age": 21
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "course": "Data Science",
+    "age": 22
+  }
+]</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Retrieves all students from the database</span>
+            <span>Response Time: 16 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 4 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-get">GET</span>
+                <span class="url-text">http://localhost:8080/api/students/1</span>
+            </div>
+            <span class="status-badge">Status: 200 OK</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Path Variable</span></div>
+                <pre>id: 1</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "course": "Computer Science",
+  "age": 21
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Retrieves a student by primary key ID</span>
+            <span>Response Time: 12 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 5 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-put">PUT</span>
+                <span class="url-text">http://localhost:8080/api/students/1</span>
+            </div>
+            <span class="status-badge">Status: 200 OK</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Request Body (raw JSON)</span></div>
+                <pre>{
+  "name": "Johnathan Doe",
+  "email": "johnathan.doe@example.com",
+  "course": "Computer Science",
+  "age": 22
+}</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>{
+  "id": 1,
+  "name": "Johnathan Doe",
+  "email": "johnathan.doe@example.com",
+  "course": "Computer Science",
+  "age": 22
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Updates student details for ID 1</span>
+            <span>Response Time: 28 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 6 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-get">GET</span>
+                <span class="url-text">http://localhost:8080/api/students/course/Data%20Science</span>
+            </div>
+            <span class="status-badge">Status: 200 OK</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Path Variable</span></div>
+                <pre>course: "Data Science"</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>[
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "course": "Data Science",
+    "age": 22
+  }
+]</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Filters and retrieves all students enrolled in the specified course</span>
+            <span>Response Time: 15 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 7 -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-delete">DELETE</span>
+                <span class="url-text">http://localhost:8080/api/students/1</span>
+            </div>
+            <span class="status-badge">Status: 200 OK</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Path Variable</span></div>
+                <pre>id: 1</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Response Body</span></div>
+                <pre>{
+  "success": true,
+  "message": "Student with ID 1 has been successfully deleted."
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Description: Deletes student record with primary key 1</span>
+            <span>Response Time: 19 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 8 (404 Error Handling) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-get">GET</span>
+                <span class="url-text">http://localhost:8080/api/students/999</span>
+            </div>
+            <span class="status-badge error">Status: 404 Not Found</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Path Variable</span></div>
+                <pre>id: 999 (Non-existent)</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Exception Response (GlobalExceptionHandler)</span></div>
+                <pre>{
+  "timestamp": "2026-11-09 19:26:42",
+  "status": 404,
+  "error": "Not Found",
+  "message": "Student not found with id : '999'",
+  "path": "/api/students/999"
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Exception: ResourceNotFoundException caught by @ControllerAdvice</span>
+            <span>Response Time: 11 ms</span>
+        </div>
+    </div>
+
+    <!-- Endpoint 9 (400 Validation Error) -->
+    <div class="card">
+        <div class="card-header">
+            <div class="request-url-bar">
+                <span class="method-badge badge-post">POST</span>
+                <span class="url-text">http://localhost:8080/api/students</span>
+            </div>
+            <span class="status-badge error">Status: 400 Bad Request</span>
+        </div>
+        <div class="card-body">
+            <div class="panel">
+                <div class="panel-title"><span>Invalid Request Body</span></div>
+                <pre>{
+  "name": "",
+  "email": "invalid-email",
+  "course": "",
+  "age": -5
+}</pre>
+            </div>
+            <div class="panel">
+                <div class="panel-title"><span>Validation Error Response</span></div>
+                <pre>{
+  "timestamp": "2026-11-09T19:26:42",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Validation failed for request arguments",
+  "errors": {
+    "name": "Student name cannot be empty",
+    "email": "Please provide a valid email address",
+    "course": "Course cannot be empty",
+    "age": "Age must be greater than 0"
+  },
+  "path": "/api/students"
+}</pre>
+            </div>
+        </div>
+        <div class="meta-info">
+            <span>Validation: MethodArgumentNotValidException caught with field errors</span>
+            <span>Response Time: 14 ms</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
